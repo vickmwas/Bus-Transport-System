@@ -69,6 +69,14 @@ const RequestRidePage = (props) => {
       });
   };
 
+
+  const searchBuses = () => {
+    console.log("Search Buses clicked")
+    
+    
+  };
+
+
   const handleCancel = () => {
     setError('Request cancelled');
     setTimeout(() => setError(''), 2000);
@@ -127,6 +135,13 @@ const RequestRidePage = (props) => {
           placeholder="Disabled people"
           onChange={handleChange}
         />
+
+          <Button
+            label="Search Buses"
+            onClick={searchBuses}
+          />
+
+        
 
         {error && (
           <div className="Error">
