@@ -7,6 +7,7 @@ const { Bus } = require('./models');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const config = require('./config/config');
+const moment = require('moment');
 
 // MIDDLEWARES 
 app.use(express.json());
@@ -193,7 +194,22 @@ app.get('/api/buses/:userID', async(req, res) => {
 //! ----- Search For Buses ------
 app.post('/api/bus/search', async(req, res) => {
     const buses = await BusStop.find();
-    res.status(200).send({ code: 200, message: buses });
+    
+    const filteredBuses = buses
+    .filter(busstop => {
+        return busstop.name == req.body.departureLocation;
+    })
+    .filter(filtered_bus_stop => {
+        return (filtered_bus_stop.destinations).includes(req.body.destinationLocation);
+    })
+    .map(filtered_bus_stop => {
+        let response = JSON.parse(JSON.stringify(filtered_bus_stop))
+
+        response.departure_time = moment(filtered_bus_stop.datetime).format('LT');
+        return response;
+    })
+
+    res.status(200).send({ code: 200, message: filteredBuses });
 
     // const bus = new Bus({
     //     plateNumber: req.body.plateNumber,
