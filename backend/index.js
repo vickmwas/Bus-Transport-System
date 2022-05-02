@@ -209,6 +209,15 @@ app.post('/api/bus/search', async(req, res) => {
         response.departure_time = moment(filtered_bus_stop.datetime).format('LT');
         return response;
     })
+    .filter(filtered_bus_stop => {
+        let userPickupTime = moment(moment(req.body.time).format('LT'), "h:mma")
+        let busStopTime = moment(moment(filtered_bus_stop.datetime).format('LT'), "h:mma")
+        
+        return userPickupTime.isBefore(busStopTime);
+
+        console.log(`${moment(req.body.pickupTime).format('LT')} === ${moment(c).format('LT')}`);
+        return moment(req.body.pickupTime).format('LT') <= moment(filtered_bus_stop.datetime).format('LT');
+    })
 
     res.status(200).send({ code: 200, message: filteredBuses });
 })

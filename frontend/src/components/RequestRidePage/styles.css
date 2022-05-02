@@ -1,0 +1,34 @@
+.busesContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.busSelect {
+  background: #fff;
+  padding: 10px 20px;
+  width: fit-content;
+  border-radius: 10px;
+  margin: 0px 10px;
+  cursor: pointer;
+}
+
+.busSelect:hover {
+  background: rgb(177, 121, 125);
+}
+
+.selected {
+  background: rgb(177, 121, 125);
+}
+
+.busSelectTime {
+  font-size: 20px;
+  font-weight: bold;
+  color: #127b01;
+}
+
+.busName {
+  font-size: 20px;
+  font-weight: bold;
+  color: #a12c00;
+}

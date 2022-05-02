@@ -11,16 +11,11 @@ import InputTextField from '../InputText';
 import SelectElement from '../../components/Select';
 import Navbar from '../Navbar';
 import {locationRoutes, buses, zones} from '../../helpers/routes';
+import './styles.css';
 
 
 const RequestRidePage = (props) => {
-  const [route, setRoute] = useState({
-    name: '',
-    zone: '',
-    destination: [],
-    bus: '',
-    time: ''
-  });
+
   const [details, setDetails] = useState({
     departureLocation: '',
     destinationLocation: '',
@@ -31,6 +26,8 @@ const RequestRidePage = (props) => {
   const [error, setError] = useState('');
 
   const [pickupTime, onDateTimeChange] = useState(new Date());
+  const [availableBuses, setAvailableBuses] = useState([]);
+  const [selectedBus, setSelectedBus] = useState('');
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -78,18 +75,23 @@ const RequestRidePage = (props) => {
         console.log(err);
       });
   };
-  const handleRouteAction = (e) => {
+  const handleSelectField = (e) => {
     //debugger;
     let nameAttribute  = e.target.getAttribute("name");
-    if(nameAttribute == "destination" ){
+    if(nameAttribute === "destination" ){
       var selectedoptions = e.target.selectedOptions;
       var values = Array.from(selectedoptions).map(obj => obj.value);
-      route[nameAttribute] = values;
+      details[nameAttribute] = values;
     }
     else{
-      route[nameAttribute] = e.target.value;
+      setDetails({
+        ...details,
+        [nameAttribute]: e.target.value
+      });
+
+      // details[nameAttribute] = e.target.value;
+      // debugger;
     }
-    
     
     let selected = e.target.value;
     // setBus(selectedBus);
@@ -105,6 +107,7 @@ const RequestRidePage = (props) => {
       disabledPeople} = details;
 
     //* Trim user details
+    console.log(details);
 
     if (!pickupTime || !departureLocation || !destinationLocation || !numberOfSits || 
       !disabledPeople) {
@@ -119,6 +122,7 @@ const RequestRidePage = (props) => {
     axios.post('/api/bus/search', rideDetails)
     .then(res => {
       console.log(res.data);
+      setAvailableBuses(res.data.message);
       
       // props.saveUser(res.data);
       // alert('Your ride has been requested')
@@ -152,32 +156,31 @@ const RequestRidePage = (props) => {
       <div className="Form">
         <div className="FormTitle">Request ride</div>
 
-                  <InputTextField
-                    required
-                    type="datetime-local"
-                    name="time"
-                    //value={route.time}
-                    placeholder="Time"
-                    onChange={handleRouteAction}
-                />
-
+          <InputTextField
+            required
+            type="datetime-local"
+            name="time"
+            //value={route.time}
+            placeholder="Time"
+            onChange={handleChange}
+        />
         
-                <SelectElement
-                    name="name"
-                    //value={route.name}
-                    placeholder="Select a Departure"
-                    onChange={handleRouteAction}
-                    options = {locationRoutes}
-                /> 
+        <SelectElement
+            name="departureLocation"
+            //value={route.name}
+            placeholder="Select a Departure"
+            onChange={handleSelectField}
+            options = {locationRoutes}
+        /> 
 
-                <SelectElement
-                    
-                    name="destination"
-                    //value={route.destination}
-                    placeholder="Select a list of Destinations"
-                    onChange={handleRouteAction}
-                    options = {locationRoutes}
-                /> 
+        <SelectElement
+            
+            name="destinationLocation"
+            //value={route.destination}
+            placeholder="Select a list of Destinations"
+            onChange={handleSelectField}
+            options = {locationRoutes}
+        /> 
 
 
         <InputTextField
@@ -203,6 +206,21 @@ const RequestRidePage = (props) => {
             onClick={searchBuses}
           />
 
+          <div className='busesContainer'>
+            {availableBuses.length !== 0 && 
+              availableBuses.map(bus => (
+                <div key={bus.bus} className={`busSelect ${selectedBus === bus.bus ? 'selected' : ''}`} onClick={() => {
+                  console.log('hello')
+                  setSelectedBus(bus.bus)
+                  }}>
+                  <span className="busSelectTime">{bus.departure_time}</span><br/>
+                  <span className="busName">{bus.bus}</span>
+                </div>
+              ))
+            }
+
+          </div>
+
         
 
         {error && (
@@ -211,10 +229,13 @@ const RequestRidePage = (props) => {
           </div>
         )}
 
-        <Button
-          label="request ride"
-          onClick={handleRequestRide}
-        />
+        {(selectedBus !== '') &&  
+            <Button
+            label="request ride"
+            onClick={handleRequestRide}
+          />
+          }
+       
 
         <Button
           label="cancel"
