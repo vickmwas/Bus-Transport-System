@@ -22,14 +22,13 @@ exports.addRoute =  async(req, res) => {
 
 
 exports.busSearch = async(req, res) => {
-
   const buses = await BusStop.find();
-  
+
   const filteredBuses = buses
   .map(filtered_bus_stop => {
       let response = JSON.parse(JSON.stringify(filtered_bus_stop))
 
-      response.departure_time = moment(filtered_bus_stop.datetime).format('LT');
+      response.departure_time = moment(response.datetime).format('LT');
       return response;
   })
   res.status(200).send({ code: 200, message: filteredBuses });
