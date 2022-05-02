@@ -190,6 +190,26 @@ app.get('/api/buses/:userID', async(req, res) => {
     }
 });
 
+//! ----- Search For Buses ------
+app.post('/api/bus/search', async(req, res) => {
+    const buses = await BusStop.find();
+    res.status(200).send({ code: 200, message: buses });
+
+    // const bus = new Bus({
+    //     plateNumber: req.body.plateNumber,
+    //     available: req.body.available,
+    //     driver: req.body.driver,
+    //     issuingDate: req.body.issuingDate,
+    // });
+    // try {
+    //     await bus.save();
+    //     res.status(200).send({ code: 200, message: 'Successfully created bus.' });
+
+    // } catch (err) {
+    //     res.status(400).send(err);
+    // }
+})
+
 //! ----- ROUTES FOR BUS STOPS ------
 
 //! ----- ROUTES FOR ZONES ------

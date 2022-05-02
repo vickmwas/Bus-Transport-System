@@ -71,7 +71,23 @@ const RequestRidePage = (props) => {
 
 
   const searchBuses = () => {
-    console.log("Search Buses clicked")
+    const {
+      departureLocation,
+      destinationLocation,
+      numberOfSits,
+      disabledPeople} = details;
+
+    //* Trim user details
+
+    if (!pickupTime || !departureLocation || !destinationLocation || !numberOfSits || 
+      !disabledPeople) {
+      setError('All fields are required');
+      return;
+    }
+
+    const rideDetails = { ...details, pickupTime, passenger: localStorage.getItem('id') };
+
+    console.log(JSON.stringify(rideDetails));
     
     
   };

@@ -7,6 +7,7 @@ import Button from '../../components/Button';
 import { trimmed } from '../../helpers';
 import InputTextField from '../../components/InputText';
 import SelectElement from '../../components/Select';
+import {locationRoutes, buses, zones} from '../../helpers/routes';
 
 const RoutesPage = (props) => {
     const [route, setRoute] = useState({
@@ -119,61 +120,15 @@ const RoutesPage = (props) => {
                     //value={route.bus}
                     placeholder="Select a Bus"
                     onChange={handleRouteAction}
-                    options = {[
-                      {
-                        "key" : "0",
-                        "value" : "Select a Bus"
-                      },
-                      {
-                        "key" : "1",
-                        "value" : "Bus 1"
-                      },
-                      {
-                        "key" : "2",
-                        "value" : "Bus 2"
-                      },
-                      {
-                        "key" : "3",
-                        "value" : "Bus 3"
-                      }
-                    ]}
+                    options = {buses}
                 />  
                 
                 <SelectElement
-                    
                     name="name"
                     //value={route.name}
                     placeholder="Select a Departure"
                     onChange={handleRouteAction}
-                    options = {[
-                      {
-                        "key" : "0",
-                        "value" : "Select Departure "
-                      },
-                      {
-                        "key" : "1",
-                        "value" : "Kimironko"
-                      },
-                      {
-                        "key" : "2",
-                        "value" : "Zindiro"
-                      },
-                      {
-                        "key" : "3",
-                        "value" : "Kwa Nayinzira"
-                      },
-                      {
-                        "key" : "4",
-                        "value" : "CMU"
-                      },
-                      {
-                        "key" : "5",
-                        "value" : "Remera"
-                      }, {
-                        "key" : "6",
-                        "value" : "Kicukiro"
-                      }
-                    ]}
+                    options = {locationRoutes}
                 /> 
                 <SelectElement
                     
@@ -182,35 +137,7 @@ const RoutesPage = (props) => {
                     placeholder="Select a list of Destinations"
                     onChange={handleRouteAction}
                     multiple
-                    options = {[
-                      {
-                        "key" : "0",
-                        "value" : "Select Destinations "
-                      },
-                      {
-                        "key" : "1",
-                        "value" : "Kimironko"
-                      },
-                      {
-                        "key" : "2",
-                        "value" : "Zindiro"
-                      },
-                      {
-                        "key" : "3",
-                        "value" : "KWa Naindira"
-                      },
-                      {
-                        "key" : "4",
-                        "value" : "CMU"
-                      },
-                      {
-                        "key" : "5",
-                        "value" : "Remera"
-                      }, {
-                        "key" : "6",
-                        "value" : "Kicukiro"
-                      }
-                    ]}
+                    options = {locationRoutes}
                 /> 
 
                   <SelectElement
@@ -219,28 +146,10 @@ const RoutesPage = (props) => {
                     //value={route.zone}
                     placeholder="Select a Zone"
                     onChange={handleRouteAction}
-                    options = {[
-                      {
-                        "key" : "1",
-                        "value" : "Select a Zone"
-                      },
-                      {
-                        "key" : "1",
-                        "value" : "Zone 1"
-                      },
-                      {
-                        "key" : "2",
-                        "value" : "Zone 2"
-                      },
-                      {
-                        "key" : "3",
-                        "value" : "Zone 3"
-                      }
-                    ]}
+                    options = {zones}
                 />  
                 
-                
-        
+              
                 {error && (
                     <div className="Error">
                     {error}
