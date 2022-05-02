@@ -1,10 +1,12 @@
 .InputTextField {
+  border-radius: 10px;
   border: 2px solid white;
-  border-bottom-color: #f22a4f;
+  border-bottom-color: #2a81f2;
   background-color: white;
   padding: .5rem;
 }
 
 .InputTextField:focus{
+  border-radius: 25px;
   outline: none;
 }

@@ -9,11 +9,17 @@
 }
 
 .LandingLoginBtn {
-  color: #09475d;
-  text-decoration: none;
-  background-color: #f22a4f;
-  text-align: center;
+  border: 2px solid #2a81f2;
   padding: .5rem 1rem;
+  background-color: #5aecd6;
+  color: #09475d;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 200px;
+  margin: auto;
 }
 
 .LoginLogo .AppName, .LoginLogo .Slogan {

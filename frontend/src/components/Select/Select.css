@@ -1,8 +1,10 @@
 .SelectElement {
     border: 2px solid white;
-    border-bottom-color: #f22a4f;
+    border-bottom-color: #2a81f2;
     background-color: white;
     padding: .5rem;
+    border-radius: 10px;
+    
   }
   
   .SelectElement:focus{
