@@ -130,6 +130,7 @@ const RequestRidePage = (props) => {
       // IF not cached, fetch data from the backend
       const res = await axios.post('/api/bus/search', rideDetails);
       buses = res.data.message;
+      console.log(buses);
       window.localStorage.setItem('buses', JSON.stringify(buses));
     }
 
@@ -148,6 +149,7 @@ const RequestRidePage = (props) => {
         return userPickupTime.isBefore(busStopTime);
     })
     
+    console.log(filteredBuses);
     setAvailableBuses(filteredBuses);
     
   };
