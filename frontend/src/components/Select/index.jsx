@@ -9,12 +9,14 @@ const SelectElement = ({ name, value, placeholder, multiple=false,onChange,  opt
   return (
 
     <select
+    
       multiple={multiple}
       className="SelectElement"
       placeholder={`${placeholder}`}
       onChange={handleChange}
       name={name}
       value={value}
+      
     >
       {
         options.map((option,index) => <option key={index} value={option.value}>{option.value}</option>)

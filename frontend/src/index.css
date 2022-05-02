@@ -13,9 +13,13 @@
   src: url("./assets/fonts/montserrat-regular.ttf") format("truetype");
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=League+Spartan:wght@100;200;300;400&display=swap');
+
 body {
   margin: 0;
-  font-family: sources-sans, sans-serif;
+  font-family: 'League Spartan', sans-serif !important;
+  /* font-family: sources-sans, sans-serif;
+   */
   /* background: #dfefff; */
 }
 
@@ -23,7 +27,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #09475d;
+  background: #d3effa;
 }
 
   /* background: linear-gradient(192.32deg, #DFEFFF 0%, #2196F3 100%); */
@@ -63,9 +67,13 @@ header div {
 
 .FormTitle {
   font-family: montserrat, sans-serif;
-  font-size: x-large;
+  font-size: 200%;
   font-weight: bold;
-  color: #ffffff;
+  color: #462177;
+  font-family: 'League Spartan', sans-serif;
+  font-variant-caps: small-caps;
+  text-transform: uppercase
+  
 }
 
 .AlternativeLink {
