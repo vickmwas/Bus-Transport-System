@@ -12,6 +12,7 @@ import SelectElement from '../../components/Select';
 import Navbar from '../Navbar';
 import {locationRoutes, buses, zones} from '../../helpers/routes';
 import './styles.css';
+import moment from 'moment'
 
 
 const RequestRidePage = (props) => {
@@ -99,7 +100,7 @@ const RequestRidePage = (props) => {
     console.log(`Selected = ${selected}`)
 };
 
-  const searchBuses = () => {
+  const searchBuses = async () => {
     const {
       departureLocation,
       destinationLocation,
@@ -119,21 +120,35 @@ const RequestRidePage = (props) => {
 
     console.log(JSON.stringify(rideDetails));
 
-    axios.post('/api/bus/search', rideDetails)
-    .then(res => {
-      console.log(res.data);
-      setAvailableBuses(res.data.message);
-      
-      // props.saveUser(res.data);
-      // alert('Your ride has been requested')
-      // window.location.href = "/passenger/my-rides"
+    let buses = [];
+    // IF data has been cached, retrieve that data instead.
+    if(window.localStorage.getItem('buses')){
+      buses = JSON.parse(window.localStorage.getItem('buses'));
+      console.log('Buses Already Cached');
+      console.log(buses);
+    } else {
+      // IF not cached, fetch data from the backend
+      const res = await axios.post('/api/bus/search', rideDetails);
+      buses = res.data.message;
+      window.localStorage.setItem('buses', JSON.stringify(buses));
+    }
+
+    // Filter the data according to the preset rules
+    const filteredBuses = buses
+      .filter(busstop => {
+          return busstop.name === rideDetails.departureLocation;
+      })
+      .filter(filtered_bus_stop => {
+          return (filtered_bus_stop.destinations).includes(rideDetails.destinationLocation);
+      })
+      .filter(filtered_bus_stop => {
+        let userPickupTime = moment(moment(rideDetails.time).format('LT'), "h:mma")
+        let busStopTime = moment(moment(filtered_bus_stop.datetime).format('LT'), "h:mma")
+        
+        return userPickupTime.isBefore(busStopTime);
     })
-    .catch((err) => {
-      setError('Process failed.');
-      
-      console.log(err);
-    });
     
+    setAvailableBuses(filteredBuses);
     
   };
 
