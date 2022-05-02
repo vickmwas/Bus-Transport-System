@@ -83,7 +83,7 @@ app.post('/api/busstop/addroute', async(req, res) => {
     //res.status(700).send(err);
     const bustStop = new BusStop({
         datetime: Date.parse(req.body.time),
-        name: req.body.name[0],
+        name: req.body.name,
         destinations: req.body.destination,
         zone: req.body.zone,
         bus: req.body.bus
