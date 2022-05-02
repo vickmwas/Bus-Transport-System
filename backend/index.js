@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const jwt = require('jsonwebtoken');
-const { User } = require('./models');
+const { User, BusStop } = require('./models');
 const { Ride } = require('./models');
 const { Bus } = require('./models');
 const mongoose = require('mongoose');
@@ -78,7 +78,24 @@ app.post('/api/users/login', async(req, res) => {
         res.status(500).send({ error: error.message });
     }
 });
+//! ----- Add Bus stop Route ------
+app.post('/api/busstop/addroute', async(req, res) => {
+    //res.status(700).send(err);
+    const bustStop = new BusStop({
+        datetime: Date.parse(req.body.time),
+        name: req.body.name[0],
+        destinations: req.body.destination,
+        zone: req.body.zone,
+        bus: req.body.bus
+    });
+    try {
+        await bustStop.save();
+        res.status(200).send({ code: 200, message: 'Successfully added bus stop route.' });
 
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
 // GET SPECIFIC USER
 app.get('/api/users/:userID', async(req, res) => {
     try {
@@ -131,6 +148,7 @@ app.get('/api/rides/:userID', async(req, res) => {
         res.json({ message: err });
     }
 });
+
 
 
 //! ----- ROUTES FOR BUSES ------

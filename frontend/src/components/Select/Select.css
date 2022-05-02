@@ -1,0 +1,10 @@
+.SelectElement {
+    border: 2px solid white;
+    border-bottom-color: #f22a4f;
+    background-color: white;
+    padding: .5rem;
+  }
+  
+  .SelectElement:focus{
+    outline: none;
+  }
