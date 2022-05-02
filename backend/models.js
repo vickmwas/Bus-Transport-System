@@ -6,6 +6,14 @@ const BusStopSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    departureTime: {
+        type: Date,
+        required: true,
+    },
+    nextDestination: {
+        type: Date,
+        required: true,
+    },
     zone: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Zone',
