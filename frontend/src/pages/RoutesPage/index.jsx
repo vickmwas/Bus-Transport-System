@@ -87,7 +87,7 @@ const RoutesPage = (props) => {
         }
         
         console.log(routeInfo)
-        debugger;
+        // debugger;
         axios.post('/api/busstop/addroute/', routeInfo)   
           .then(res => {
             alert("Yay! Bus stop route added succesfully!");
@@ -160,7 +160,7 @@ const RoutesPage = (props) => {
                       },
                       {
                         "key" : "3",
-                        "value" : "KWa Naindira"
+                        "value" : "Kwa Nayinzira"
                       },
                       {
                         "key" : "4",
@@ -169,6 +169,9 @@ const RoutesPage = (props) => {
                       {
                         "key" : "5",
                         "value" : "Remera"
+                      }, {
+                        "key" : "6",
+                        "value" : "Kicukiro"
                       }
                     ]}
                 /> 
@@ -203,6 +206,9 @@ const RoutesPage = (props) => {
                       {
                         "key" : "5",
                         "value" : "Remera"
+                      }, {
+                        "key" : "6",
+                        "value" : "Kicukiro"
                       }
                     ]}
                 /> 
