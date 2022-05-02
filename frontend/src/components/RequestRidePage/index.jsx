@@ -10,7 +10,7 @@ import Button from '../Button';
 import InputTextField from '../InputText';
 import SelectElement from '../../components/Select';
 import Navbar from '../Navbar';
-import {locationRoutes, buses, zones} from '../../helpers/routes';
+import {locationRoutes, destinationRoutes, buses, zones} from '../../helpers/routes';
 import './styles.css';
 import moment from 'moment'
 
@@ -196,7 +196,7 @@ const RequestRidePage = (props) => {
             //value={route.destination}
             placeholder="Select a list of Destinations"
             onChange={handleSelectField}
-            options = {locationRoutes}
+            options = {destinationRoutes}
         /> 
 
 

@@ -28,6 +28,36 @@ export const locationRoutes = [
   }
 ];
 
+export const destinationRoutes = [
+  {
+    "key" : "0",
+    "value" : "Select a destination"
+  },
+  {
+    "key" : "1",
+    "value" : "Kimironko"
+  },
+  {
+    "key" : "2",
+    "value" : "Zindiro"
+  },
+  {
+    "key" : "3",
+    "value" : "Kwa Nayinzira"
+  },
+  {
+    "key" : "4",
+    "value" : "CMU"
+  },
+  {
+    "key" : "5",
+    "value" : "Remera"
+  }, {
+    "key" : "6",
+    "value" : "Kicukiro"
+  }
+];
+
 
 export const buses = [
     {

@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 import { trimmed } from '../../helpers';
 import InputTextField from '../../components/InputText';
 import SelectElement from '../../components/Select';
-import {locationRoutes, buses, zones} from '../../helpers/routes';
+import {locationRoutes, destinationRoutes, buses, zones} from '../../helpers/routes';
 
 const RoutesPage = (props) => {
     const [route, setRoute] = useState({
@@ -137,7 +137,7 @@ const RoutesPage = (props) => {
                     placeholder="Select a list of Destinations"
                     onChange={handleRouteAction}
                     multiple
-                    options = {locationRoutes}
+                    options = {destinationRoutes}
                 /> 
 
                   <SelectElement
