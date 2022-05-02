@@ -88,6 +88,20 @@ const RequestRidePage = (props) => {
     const rideDetails = { ...details, pickupTime, passenger: localStorage.getItem('id') };
 
     console.log(JSON.stringify(rideDetails));
+
+    axios.post('/api/bus/search', rideDetails)
+    .then(res => {
+      console.log(res.data);
+      
+      // props.saveUser(res.data);
+      // alert('Your ride has been requested')
+      // window.location.href = "/passenger/my-rides"
+    })
+    .catch((err) => {
+      setError('Process failed.');
+      
+      console.log(err);
+    });
     
     
   };
