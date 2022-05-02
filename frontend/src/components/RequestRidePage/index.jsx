@@ -8,9 +8,19 @@ import saveUser from '../../redux/actions/saveUser';
 import { isValidEmail, isValidUsername, trimmed } from '../../helpers';
 import Button from '../Button';
 import InputTextField from '../InputText';
+import SelectElement from '../../components/Select';
 import Navbar from '../Navbar';
+import {locationRoutes, buses, zones} from '../../helpers/routes';
+
 
 const RequestRidePage = (props) => {
+  const [route, setRoute] = useState({
+    name: '',
+    zone: '',
+    destination: [],
+    bus: '',
+    time: ''
+  });
   const [details, setDetails] = useState({
     departureLocation: '',
     destinationLocation: '',
@@ -68,7 +78,24 @@ const RequestRidePage = (props) => {
         console.log(err);
       });
   };
+  const handleRouteAction = (e) => {
+    //debugger;
+    let nameAttribute  = e.target.getAttribute("name");
+    if(nameAttribute == "destination" ){
+      var selectedoptions = e.target.selectedOptions;
+      var values = Array.from(selectedoptions).map(obj => obj.value);
+      route[nameAttribute] = values;
+    }
+    else{
+      route[nameAttribute] = e.target.value;
+    }
+    
+    
+    let selected = e.target.value;
+    // setBus(selectedBus);
 
+    console.log(`Selected = ${selected}`)
+};
 
   const searchBuses = () => {
     const {
@@ -125,28 +152,33 @@ const RequestRidePage = (props) => {
       <div className="Form">
         <div className="FormTitle">Request ride</div>
 
-        <DateTimePicker
-          onChange={onDateTimeChange}
-          value={pickupTime}
-        />
+                  <InputTextField
+                    required
+                    type="datetime-local"
+                    name="time"
+                    //value={route.time}
+                    placeholder="Time"
+                    onChange={handleRouteAction}
+                />
 
-        <InputTextField
-          required
-          type="text"
-          name="departureLocation"
-          value={details.departureLocation}
-          placeholder="Departure Location"
-          onChange={handleChange}
-        />
+        
+                <SelectElement
+                    name="name"
+                    //value={route.name}
+                    placeholder="Select a Departure"
+                    onChange={handleRouteAction}
+                    options = {locationRoutes}
+                /> 
 
-        <InputTextField
-          required
-          type="text"
-          name="destinationLocation"
-          value={details.destinationLocation}
-          placeholder="Destination Location"
-          onChange={handleChange}
-        />
+                <SelectElement
+                    
+                    name="destination"
+                    //value={route.destination}
+                    placeholder="Select a list of Destinations"
+                    onChange={handleRouteAction}
+                    options = {locationRoutes}
+                /> 
+
 
         <InputTextField
           required
