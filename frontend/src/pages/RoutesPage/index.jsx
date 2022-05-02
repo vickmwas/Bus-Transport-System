@@ -172,6 +172,9 @@ const RoutesPage = (props) => {
                       }, {
                         "key" : "6",
                         "value" : "Kicukiro"
+                      }, {
+                        "key" : "7",
+                        "value" : "Kigali Town"
                       }
                     ]}
                 /> 
@@ -209,6 +212,9 @@ const RoutesPage = (props) => {
                       }, {
                         "key" : "6",
                         "value" : "Kicukiro"
+                      }, {
+                        "key" : "7",
+                        "value" : "Kigali Town"
                       }
                     ]}
                 /> 
