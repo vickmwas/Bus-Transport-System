@@ -196,29 +196,14 @@ app.post('/api/bus/search', async(req, res) => {
 
     const buses = await BusStop.find();
     
+    
     const filteredBuses = buses
-    .filter(busstop => {
-        return busstop.name == req.body.departureLocation;
-    })
-    .filter(filtered_bus_stop => {
-        return (filtered_bus_stop.destinations).includes(req.body.destinationLocation);
-    })
     .map(filtered_bus_stop => {
         let response = JSON.parse(JSON.stringify(filtered_bus_stop))
 
         response.departure_time = moment(filtered_bus_stop.datetime).format('LT');
         return response;
     })
-    .filter(filtered_bus_stop => {
-        let userPickupTime = moment(moment(req.body.time).format('LT'), "h:mma")
-        let busStopTime = moment(moment(filtered_bus_stop.datetime).format('LT'), "h:mma")
-        
-        return userPickupTime.isBefore(busStopTime);
-
-        console.log(`${moment(req.body.pickupTime).format('LT')} === ${moment(c).format('LT')}`);
-        return moment(req.body.pickupTime).format('LT') <= moment(filtered_bus_stop.datetime).format('LT');
-    })
-
     res.status(200).send({ code: 200, message: filteredBuses });
 })
 
